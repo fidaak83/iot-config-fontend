@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
+    <link rel="icon" href="icon.png" type="image/x-icon">
+</head>
+
+<body class="dark bg-gray-800">
+
+
+
+    <div class="w-screen h-screen p-2 ">
+        <div class="w-full h-full bg-gray-900 rounded-lg p-4">
+
+            <div class="mb-4 border-b border-gray-700">
+                <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="default-tab"
+                    data-tabs-toggle="#default-tab-content" role="tablist">
+                    <li role="presentation">
+                        <button
+                            class="inline-flex items-center justify-center p-4 rounded-t-lg hover:text-gray-300 active"
+                            id="settings-tab" data-tabs-target="#configuration" type="button" role="tab"
+                            aria-controls="configuration" aria-selected="true">
+                            <i class="fa-solid fa-gear mr-2"></i>Configuration</button>
+                    </li>
+                    <li role="presentation">
+                        <button class="inline-flex items-center justify-center p-4 rounded-t-lg hover:text-gray-300"
+                            id="dashboard-tab" data-tabs-target="#dashboard" type="button" role="tab"
+                            aria-controls="dashboard" aria-selected="false">
+                            <i class="fa-brands fa-readme mr-2"></i>View Stored Data</button>
+                    </li>
+                    <li role="presentation">
+                        <button class="inline-flex items-center justify-center p-4 rounded-t-lg" id="profile-tab"
+                            data-tabs-target="#set-password" type="button" role="tab" aria-controls="set-password"
+                            aria-selected="false">
+                            <i class="fa-solid fa-unlock-keyhole mr-2"></i>Set Lock</button>
+                    </li>
+                </ul>
+            </div>
+
+            <div id="default-tab-content">
+                <!-- configuration -->
+                <div class="p-4 rounded-lg bg-gray-900 hidden" id="configuration" role="tabpanel"
+                    aria-labelledby="configuration-tab">
+                    <p class="text-sm text-gray-400">
+                        <form class="max-w-sm mx-auto" onsubmit="handleConfigFormSubmit(event)">
+                            <div class="mb-5">
+                                <label for="email" class="block mb-2 text-sm font-medium text-white">API Link</label>
+                                <div class="relative">
+                                    <div
+                                        class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                                        <i class="fa-solid fa-earth-asia w-4 h-4 text-gray-400"></i>
+                                    </div>
+                                    <input type="text" name="link"
+                                        class="bg-gray-800 border border-gray-700 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 placeholder-gray-400"
+                                        placeholder="https://your-api-link" />
+                                </div>
+                            </div>
+                            <div class="mb-5">
+                                <label for="email" class="block mb-2 text-sm font-medium text-white">APN
+                                    Username</label>
+                                <div class="relative">
+                                    <div
+                                        class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                                        <i class="fa-solid fa-earth-asia w-4 h-4 text-gray-400"></i>
+                                    </div>
+                                    <input type="text" name="apn_username"
+                                        class="bg-gray-800 border border-gray-700 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 placeholder-gray-400"
+                                        placeholder="APN Username" />
+                                </div>
+                            </div>
+                            <div class="mb-5">
+                                <label for="email" class="block mb-2 text-sm font-medium text-white">APN
+                                    Password</label>
+                                <div class="relative">
+                                    <div
+                                        class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                                        <i class="fa-solid fa-earth-asia w-4 h-4 text-gray-400"></i>
+                                    </div>
+                                    <input type="password" name="apn_password"
+                                        class="bg-gray-800 border border-gray-700 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 placeholder-gray-400"
+                                        placeholder="APN Password" />
+                                </div>
+                            </div>
+
+                            <button type="submit"
+                                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Save</button>
+                        </form>
+
+                    </p>
+                </div>
+                <!-- set-password -->
+                <div class="p-4 rounded-lg bg-gray-900 hidden" id="set-password" role="tabpanel"
+                    aria-labelledby="configuration-tab">
+                    <p class="text-sm text-gray-400">
+                        <form class="max-w-sm mx-auto">
+                            <div class="mb-5">
+                                <label for="email" class="block mb-2 text-sm font-medium text-white">Current
+                                    Password</label>
+                                <div class="relative">
+                                    <div
+                                        class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                                        <i class="fa-solid fa-key w-4 h-4 text-gray-400"></i>
+                                    </div>
+                                    <input type="password" id="email-address-icon"
+                                        class="bg-gray-800 border border-gray-700 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 placeholder-gray-400"
+                                        placeholder="Current Password" />
+                                </div>
+                            </div>
+                            <div class="mb-5">
+                                <label for="email" class="block mb-2 text-sm font-medium text-white">New
+                                    Password</label>
+                                <div class="relative">
+                                    <div
+                                        class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                                        <i class="fa-solid fa-key w-4 h-4 text-gray-400"></i>
+                                    </div>
+                                    <input type="password" id="email-address-icon"
+                                        class="bg-gray-800 border border-gray-700 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 placeholder-gray-400"
+                                        placeholder="New Password" />
+                                </div>
+                            </div>
+                            <div class="mb-5">
+                                <label for="email" class="block mb-2 text-sm font-medium text-white">Confirm
+                                    Password</label>
+                                <div class="relative">
+                                    <div
+                                        class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                                        <i class="fa-solid fa-key w-4 h-4 text-gray-400"></i>
+                                    </div>
+                                    <input type="password" id="email-address-icon"
+                                        class="bg-gray-800 border border-gray-700 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 placeholder-gray-400"
+                                        placeholder="Confirm Password" />
+                                </div>
+                            </div>
+
+                            <button type="submit"
+                                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Save</button>
+                        </form>
+
+                    </p>
+                </div>
+
+                <div class="rounded-lg bg-gray-900 hidden" id="dashboard" role="tabpanel"
+                    aria-labelledby="dashboard-tab">
+                    <p class="text-sm text-gray-400">
+                        <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                            <table class="w-full text-xs text-left text-gray-400">
+                                <thead class="uppercase bg-gray-700 text-gray-400">
+                                    <tr>
+                                        <th class="px-2 py-2">ID</th>
+                                        <th class="px-2 py-2">Date & Time</th>
+                                        <th class="px-2 py-2">DN1</th>
+                                        <th class="px-2 py-2">DN2</th>
+                                        <th class="px-2 py-2">DN3</th>
+                                        <th class="px-2 py-2">DN4</th>
+                                        <th class="px-2 py-2">DN5</th>
+                                        <th class="px-2 py-2">AN1</th>
+                                        <th class="px-2 py-2">AN2</th>
+                                        <th class="px-2 py-2">AN3</th>
+                                        <th class="px-2 py-2">AN4</th>
+                                        <th class="px-2 py-2">1 Wire 1</th>
+                                        <th class="px-2 py-2">1 Wire 2</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Row Template -->
+                                    <tr class="bg-gray-900 border-b border-gray-700">
+                                        <td class="px-2 py-1 text-white">1</td>
+                                        <td class="px-2 py-1">2025-05-31 10:10:01</td>
+                                        <td class="px-2 py-1">ON</td>
+                                        <td class="px-2 py-1">OFF</td>
+                                        <td class="px-2 py-1">ON</td>
+                                        <td class="px-2 py-1">OFF</td>
+                                        <td class="px-2 py-1">ON</td>
+                                        <td class="px-2 py-1">3.1V</td>
+                                        <td class="px-2 py-1">2.9V</td>
+                                        <td class="px-2 py-1">3.0V</td>
+                                        <td class="px-2 py-1">3.3V</td>
+                                        <td class="px-2 py-1">LOW</td>
+                                        <td class="px-2 py-1">HIGH</td>
+                                    </tr>
+                                    <tr class="bg-gray-800 border-b border-gray-700">
+                                        <td class="px-2 py-1 text-white">2</td>
+                                        <td class="px-2 py-1">2025-05-31 10:12:44</td>
+                                        <td class="px-2 py-1">OFF</td>
+                                        <td class="px-2 py-1">OFF</td>
+                                        <td class="px-2 py-1">ON</td>
+                                        <td class="px-2 py-1">ON</td>
+                                        <td class="px-2 py-1">OFF</td>
+                                        <td class="px-2 py-1">3.2V</td>
+                                        <td class="px-2 py-1">3.0V</td>
+                                        <td class="px-2 py-1">3.2V</td>
+                                        <td class="px-2 py-1">3.3V</td>
+                                        <td class="px-2 py-1">HIGH</td>
+                                        <td class="px-2 py-1">LOW</td>
+                                    </tr>
+                                    <tr class="bg-gray-900 border-b border-gray-700">
+                                        <td class="px-2 py-1 text-white">3</td>
+                                        <td class="px-2 py-1">2025-05-31 10:15:28</td>
+                                        <td class="px-2 py-1">ON</td>
+                                        <td class="px-2 py-1">ON</td>
+                                        <td class="px-2 py-1">ON</td>
+                                        <td class="px-2 py-1">OFF</td>
+                                        <td class="px-2 py-1">OFF</td>
+                                        <td class="px-2 py-1">3.3V</td>
+                                        <td class="px-2 py-1">3.1V</td>
+                                        <td class="px-2 py-1">3.0V</td>
+                                        <td class="px-2 py-1">2.9V</td>
+                                        <td class="px-2 py-1">LOW</td>
+                                        <td class="px-2 py-1">LOW</td>
+                                    </tr>
+                                    <tr class="bg-gray-800 border-b border-gray-700">
+                                        <td class="px-2 py-1 text-white">4</td>
+                                        <td class="px-2 py-1">2025-05-31 10:18:10</td>
+                                        <td class="px-2 py-1">OFF</td>
+                                        <td class="px-2 py-1">ON</td>
+                                        <td class="px-2 py-1">OFF</td>
+                                        <td class="px-2 py-1">OFF</td>
+                                        <td class="px-2 py-1">ON</td>
+                                        <td class="px-2 py-1">2.8V</td>
+                                        <td class="px-2 py-1">2.9V</td>
+                                        <td class="px-2 py-1">3.1V</td>
+                                        <td class="px-2 py-1">3.0V</td>
+                                        <td class="px-2 py-1">HIGH</td>
+                                        <td class="px-2 py-1">HIGH</td>
+                                    </tr>
+                                    <tr class="bg-gray-900 border-b border-gray-700">
+                                        <td class="px-2 py-1 text-white">5</td>
+                                        <td class="px-2 py-1">2025-05-31 10:20:52</td>
+                                        <td class="px-2 py-1">ON</td>
+                                        <td class="px-2 py-1">ON</td>
+                                        <td class="px-2 py-1">OFF</td>
+                                        <td class="px-2 py-1">ON</td>
+                                        <td class="px-2 py-1">ON</td>
+                                        <td class="px-2 py-1">3.0V</td>
+                                        <td class="px-2 py-1">3.2V</td>
+                                        <td class="px-2 py-1">3.3V</td>
+                                        <td class="px-2 py-1">3.1V</td>
+                                        <td class="px-2 py-1">LOW</td>
+                                        <td class="px-2 py-1">HIGH</td>
+                                    </tr>
+                                    <tr class="bg-gray-800 border-b border-gray-700">
+                                        <td class="px-2 py-1 text-white">6</td>
+                                        <td class="px-2 py-1">2025-05-31 10:23:05</td>
+                                        <td class="px-2 py-1">OFF</td>
+                                        <td class="px-2 py-1">ON</td>
+                                        <td class="px-2 py-1">ON</td>
+                                        <td class="px-2 py-1">OFF</td>
+                                        <td class="px-2 py-1">OFF</td>
+                                        <td class="px-2 py-1">2.9V</td>
+                                        <td class="px-2 py-1">3.0V</td>
+                                        <td class="px-2 py-1">3.1V</td>
+                                        <td class="px-2 py-1">3.2V</td>
+                                        <td class="px-2 py-1">HIGH</td>
+                                        <td class="px-2 py-1">LOW</td>
+                                    </tr>
+                                    <tr class="bg-gray-900 border-b border-gray-700">
+                                        <td class="px-2 py-1 text-white">7</td>
+                                        <td class="px-2 py-1">2025-05-31 10:25:30</td>
+                                        <td class="px-2 py-1">ON</td>
+                                        <td class="px-2 py-1">OFF</td>
+                                        <td class="px-2 py-1">OFF</td>
+                                        <td class="px-2 py-1">ON</td>
+                                        <td class="px-2 py-1">OFF</td>
+                                        <td class="px-2 py-1">3.0V</td>
+                                        <td class="px-2 py-1">2.8V</td>
+                                        <td class="px-2 py-1">3.2V</td>
+                                        <td class="px-2 py-1">3.3V</td>
+                                        <td class="px-2 py-1">LOW</td>
+                                        <td class="px-2 py-1">LOW</td>
+                                    </tr>
+                                    <tr class="bg-gray-800 border-b border-gray-700">
+                                        <td class="px-2 py-1 text-white">8</td>
+                                        <td class="px-2 py-1">2025-05-31 10:28:11</td>
+                                        <td class="px-2 py-1">OFF</td>
+                                        <td class="px-2 py-1">OFF</td>
+                                        <td class="px-2 py-1">ON</td>
+                                        <td class="px-2 py-1">ON</td>
+                                        <td class="px-2 py-1">ON</td>
+                                        <td class="px-2 py-1">3.3V</td>
+                                        <td class="px-2 py-1">3.1V</td>
+                                        <td class="px-2 py-1">3.0V</td>
+                                        <td class="px-2 py-1">2.9V</td>
+                                        <td class="px-2 py-1">HIGH</td>
+                                        <td class="px-2 py-1">HIGH</td>
+                                    </tr>
+                                    <tr class="bg-gray-900 border-b border-gray-700">
+                                        <td class="px-2 py-1 text-white">9</td>
+                                        <td class="px-2 py-1">2025-05-31 10:30:55</td>
+                                        <td class="px-2 py-1">ON</td>
+                                        <td class="px-2 py-1">ON</td>
+                                        <td class="px-2 py-1">OFF</td>
+                                        <td class="px-2 py-1">OFF</td>
+                                        <td class="px-2 py-1">ON</td>
+                                        <td class="px-2 py-1">3.2V</td>
+                                        <td class="px-2 py-1">3.1V</td>
+                                        <td class="px-2 py-1">3.0V</td>
+                                        <td class="px-2 py-1">3.3V</td>
+                                        <td class="px-2 py-1">LOW</td>
+                                        <td class="px-2 py-1">HIGH</td>
+                                    </tr>
+                                    <tr class="bg-gray-800">
+                                        <td class="px-2 py-1 text-white">10</td>
+                                        <td class="px-2 py-1">2025-05-31 10:33:19</td>
+                                        <td class="px-2 py-1">OFF</td>
+                                        <td class="px-2 py-1">ON</td>
+                                        <td class="px-2 py-1">ON</td>
+                                        <td class="px-2 py-1">OFF</td>
+                                        <td class="px-2 py-1">OFF</td>
+                                        <td class="px-2 py-1">2.8V</td>
+                                        <td class="px-2 py-1">3.2V</td>
+                                        <td class="px-2 py-1">3.1V</td>
+                                        <td class="px-2 py-1">3.3V</td>
+                                        <td class="px-2 py-1">HIGH</td>
+                                        <td class="px-2 py-1">LOW</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </p>
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+    <script src="script.js"></script>
+
+
+
+</body>
+
+</html>
