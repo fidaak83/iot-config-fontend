@@ -7,39 +7,83 @@
     <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
     <link rel="icon" href="icon.png" type="image/x-icon">
 </head>
 
-<body class="dark bg-gray-800">
-
+<body class="dark bg-gray-800 rounded-lg">
 
 
     <div class="w-screen h-screen p-2 ">
-        <div class="w-full h-full bg-gray-900 rounded-lg p-4">
 
-            <div class="mb-4 border-b border-gray-700">
-                <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="default-tab"
-                    data-tabs-toggle="#default-tab-content" role="tablist">
-                    <li role="presentation">
-                        <button
-                            class="inline-flex items-center justify-center p-4 rounded-t-lg hover:text-gray-300 active"
-                            id="settings-tab" data-tabs-target="#configuration" type="button" role="tab"
-                            aria-controls="configuration" aria-selected="true">
-                            <i class="fa-solid fa-gear mr-2"></i>Configuration</button>
-                    </li>
-                    <li role="presentation">
-                        <button class="inline-flex items-center justify-center p-4 rounded-t-lg hover:text-gray-300"
-                            id="dashboard-tab" data-tabs-target="#dashboard" type="button" role="tab"
-                            aria-controls="dashboard" aria-selected="false">
-                            <i class="fa-brands fa-readme mr-2"></i>View Stored Data</button>
-                    </li>
-                    <li role="presentation">
-                        <button class="inline-flex items-center justify-center p-4 rounded-t-lg" id="profile-tab"
-                            data-tabs-target="#set-password" type="button" role="tab" aria-controls="set-password"
-                            aria-selected="false">
-                            <i class="fa-solid fa-unlock-keyhole mr-2"></i>Set Lock</button>
-                    </li>
-                </ul>
+        <div class="w-full h-full bg-gray-900 rounded-lg p-4">
+            <div id="titlebar" class="">
+                <nav class="bg-gray-900 w-full z-20 top-0 start-0  mb-5">
+                    <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto">
+                        <a href="https://flowbite.com/" class="flex items-center space-x-3 rtl:space-x-reverse">
+                            <img src="icon.png" class="h-8" alt="Flowbite Logo">
+                            <span class="self-center text-2xl font-semibold whitespace-nowrap text-white">IoT
+                                Configurator</span>
+                        </a>
+                        <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+                            <button onclick="exit()" type="button"
+                                class="text-white focus:outline-none font-medium rounded-full text-sm px-4 py-2 text-center">
+                                <i class="fa-solid fa-x w-4 h-4"></i>
+                            </button>
+                        </div>
+                    </div>
+                </nav>
+
+            </div>
+            <div class="flex flex-wrap items-center justify-between mx-auto w-full border-b border-gray-700">
+                <div class="mb-4">
+                    <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="default-tab"
+                        data-tabs-toggle="#default-tab-content" role="tablist">
+                        <li role="presentation">
+                            <button
+                                class="inline-flex items-center justify-center p-4 rounded-t-lg hover:text-gray-300 active"
+                                id="settings-tab" data-tabs-target="#configuration" type="button" role="tab"
+                                aria-controls="configuration" aria-selected="true">
+                                <i class="fa-solid fa-gear mr-2"></i>Configuration</button>
+                        </li>
+                        <li role="presentation">
+                            <button class="inline-flex items-center justify-center p-4 rounded-t-lg hover:text-gray-300"
+                                id="dashboard-tab" data-tabs-target="#dashboard" type="button" role="tab"
+                                aria-controls="dashboard" aria-selected="false">
+                                <i class="fa-brands fa-readme mr-2"></i>View Stored Data</button>
+                        </li>
+                        <li role="presentation">
+                            <button class="inline-flex items-center justify-center p-4 rounded-t-lg" id="profile-tab"
+                                data-tabs-target="#set-password" type="button" role="tab" aria-controls="set-password"
+                                aria-selected="false">
+                                <i class="fa-solid fa-unlock-keyhole mr-2"></i>Set Lock</button>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+
+                    <button type="button" data-dropdown-toggle="dropdownRadioHelper"
+                        class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700">
+                        <i class="fa-solid fa-plug w-4 h-4"></i>
+                    </button>
+                    <button type="button" onclick="getComs()"
+                        class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700">
+                        <i class="fa-solid fa-arrows-rotate w-4 h-4"></i>
+                    </button>
+
+
+
+                    <!-- Dropdown menu -->
+                    <div id="dropdownRadioHelper"
+                        class="relative z-10 hidden bg-gray-700 divide-y divide-gray-800 rounded-lg shadow-sm w-60">
+                        <ul class="p-3 space-y-1 text-sm text-gray-200" aria-labelledby="dropdownRadioHelperButton"
+                            id="comList">
+
+                        </ul>
+                    </div>
+
+                </div>
             </div>
 
             <div id="default-tab-content">
@@ -47,7 +91,7 @@
                 <div class="p-4 rounded-lg bg-gray-900 hidden" id="configuration" role="tabpanel"
                     aria-labelledby="configuration-tab">
                     <p class="text-sm text-gray-400">
-                        <form class="max-w-sm mx-auto" onsubmit="handleConfigFormSubmit(event)">
+                        <form class="max-w-sm mx-auto" onsubmit="handleConfigFormSubmit(event,'config')">
                             <div class="mb-5">
                                 <label for="email" class="block mb-2 text-sm font-medium text-white">API Link</label>
                                 <div class="relative">
@@ -88,7 +132,10 @@
                             </div>
 
                             <button type="submit"
-                                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Save</button>
+                                class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700">
+                                Save
+                            </button>
+
                         </form>
 
                     </p>
@@ -97,7 +144,7 @@
                 <div class="p-4 rounded-lg bg-gray-900 hidden" id="set-password" role="tabpanel"
                     aria-labelledby="configuration-tab">
                     <p class="text-sm text-gray-400">
-                        <form class="max-w-sm mx-auto">
+                        <form class="max-w-sm mx-auto" onsubmit="handleConfigFormSubmit(event, 'password')">
                             <div class="mb-5">
                                 <label for="email" class="block mb-2 text-sm font-medium text-white">Current
                                     Password</label>
@@ -106,7 +153,7 @@
                                         class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
                                         <i class="fa-solid fa-key w-4 h-4 text-gray-400"></i>
                                     </div>
-                                    <input type="password" id="email-address-icon"
+                                    <input type="password" id="email-address-icon" name="current_password"
                                         class="bg-gray-800 border border-gray-700 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 placeholder-gray-400"
                                         placeholder="Current Password" />
                                 </div>
@@ -119,7 +166,7 @@
                                         class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
                                         <i class="fa-solid fa-key w-4 h-4 text-gray-400"></i>
                                     </div>
-                                    <input type="password" id="email-address-icon"
+                                    <input type="password" id="email-address-icon" name="new_password"
                                         class="bg-gray-800 border border-gray-700 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 placeholder-gray-400"
                                         placeholder="New Password" />
                                 </div>
@@ -132,20 +179,23 @@
                                         class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
                                         <i class="fa-solid fa-key w-4 h-4 text-gray-400"></i>
                                     </div>
-                                    <input type="password" id="email-address-icon"
+                                    <input type="password" id="email-address-icon" name="confirm_password"
                                         class="bg-gray-800 border border-gray-700 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 placeholder-gray-400"
                                         placeholder="Confirm Password" />
                                 </div>
                             </div>
 
                             <button type="submit"
-                                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Save</button>
+                                class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700">
+                                Save
+                            </button>
+
                         </form>
 
                     </p>
                 </div>
-
-                <div class="rounded-lg bg-gray-900 hidden" id="dashboard" role="tabpanel"
+                <!-- Data Table -->
+                <div class="rounded-lg bg-gray-900 hidden mt-4" id="dashboard" role="tabpanel"
                     aria-labelledby="dashboard-tab">
                     <p class="text-sm text-gray-400">
                         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -326,14 +376,26 @@
                     </p>
                 </div>
 
-
             </div>
 
         </div>
     </div>
 
+
+
+
     <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="script.js"></script>
+
+    <!-- <script>
+        $('document').ready(function () {
+            getComs();
+        });
+    </script> -->
 
 
 
